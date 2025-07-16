@@ -1,1 +1,40 @@
-spring.application.name=ChatService
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ChatService
+  cache:
+    type: redis
+    ttl-seconds: 300
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  datasource:
+    url: jdbc:h2:mem:chatdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-chat-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+
+logging:
+  level:
+    org.springframework: INFO
+    com.example.chatservice: DEBUG
+
+
+user-service:
+  url: http://localhost:8084
